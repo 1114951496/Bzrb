@@ -1,0 +1,84 @@
+====================================================================================================
+1、OKHTTP
+
+GET A URL
+
+This program downloads a URL and print its contents as a string.
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>begin>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+OkHttpClient client = new OkHttpClient();
+
+String run(String url) throws IOException {
+  Request request = new Request.Builder()
+      .url(url)
+      .build();
+
+  Response response = client.newCall(request).execute();
+  return response.body().string();
+}
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<end<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+POST TO A SERVER
+
+This program posts data to a service. Full source.
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>begin>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+public static final MediaType JSON
+    = MediaType.parse("application/json; charset=utf-8");
+
+OkHttpClient client = new OkHttpClient();
+
+String post(String url, String json) throws IOException {
+  RequestBody body = RequestBody.create(JSON, json);
+  Request request = new Request.Builder()
+      .url(url)
+      .post(body)
+      .build();
+  Response response = client.newCall(request).execute();
+  return response.body().string();
+}
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<end<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+更多内容请查看:http://square.github.io/okhttp/
+====================================================================================================
+2、Picasso
+
+ADAPTER DOWNLOADS
+
+Adapter re-use is automatically detected and the previous download canceled.
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+@Override public void getView(int position, View convertView, ViewGroup parent) {
+  SquaredImageView view = (SquaredImageView) convertView;
+  if (view == null) {
+    view = new SquaredImageView(context);
+  }
+  String url = getItem(position);
+
+  Picasso.with(context).load(url).into(view);
+}
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+IMAGE TRANSFORMATIONS
+
+Transform images to better fit into layouts and to reduce memory size.
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Picasso.with(context)
+  .load(url)
+  .resize(50, 50)
+  .centerCrop()
+  .into(imageView)
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+You can also specify custom transformations for more advanced effects.
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+public class CropSquareTransformation implements Transformation {
+  @Override public Bitmap transform(Bitmap source) {
+    int size = Math.min(source.getWidth(), source.getHeight());
+    int x = (source.getWidth() - size) / 2;
+    int y = (source.getHeight() - size) / 2;
+    Bitmap result = Bitmap.createBitmap(source, x, y, size, size);
+    if (result != source) {
+      source.recycle();
+    }
+    return result;
+  }
+
+  @Override public String key() { return "square()"; }
+}
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+Pass an instance of this class to the transform method.
+更多内容请查看:http://square.github.io/picasso/
