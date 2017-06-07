@@ -9,10 +9,14 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.jude.rollviewpager.RollPagerView;
+import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 
 import java.util.ArrayList;
 
@@ -36,11 +40,17 @@ public class IndexActivity extends Activity implements View.OnClickListener {
     private int bmpW;
     //已被滚动量
     private int one;
+    //轮播图
+    private RollPagerView rollPagerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
+        init();
+    }
+
+    public void init(){
         //查找布局文件
         LayoutInflater inflater=getLayoutInflater();
         View view1=inflater.inflate(R.layout.index_viewpages_1,null);
@@ -101,8 +111,13 @@ public class IndexActivity extends Activity implements View.OnClickListener {
         matrix.postTranslate(offset, 0);
         //将滚动条的初始位置设置成与左边界间隔一个offset
         scrollbar.setImageMatrix(matrix);
-    }
 
+        //首页轮播图
+        rollPagerView=(RollPagerView)view1.findViewById(R.id.rollViewpager);
+        rollPagerView.setPlayDelay(3000);//*播放间隔
+        rollPagerView.setAnimationDurtion(500);//透明度
+        rollPagerView.setAdapter(new rollViewpagerAdapter());//配置适配器
+    }
 
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
@@ -140,6 +155,26 @@ public class IndexActivity extends Activity implements View.OnClickListener {
 
         @Override
         public void onPageScrollStateChanged(int arg0) {
+        }
+    }
+
+    private class rollViewpagerAdapter extends StaticPagerAdapter {
+
+        private int[] res={R.drawable.splash,R.drawable.scrollbar};
+
+        @Override
+        public View getView(ViewGroup container, int position) {
+            ImageView imageView=new ImageView(container.getContext());
+            imageView.setImageResource(res[position]);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+            return imageView;
+        }
+
+        @Override
+        public int getCount() {
+            return res.length;
         }
     }
 

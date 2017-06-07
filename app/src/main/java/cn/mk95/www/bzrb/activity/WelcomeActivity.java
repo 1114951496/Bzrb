@@ -34,7 +34,7 @@ public class WelcomeActivity extends Activity {
 
     //寻找控件
     private void findView() {
-        welcomeImg=(ImageView) findViewById(R.id.welcome_img);
+        welcomeImg=(ImageView) findViewById(R.id.welcomeImg);
     }
 
     private class AnimationImpl implements Animation.AnimationListener {
