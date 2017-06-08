@@ -5,19 +5,21 @@
     android:orientation="vertical">
     <!--轮播图-->
     <com.jude.rollviewpager.RollPagerView
+        android:id="@+id/rollViewpager"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:id="@+id/rollViewpager"/>
+        android:layout_height="200dp">
+    </com.jude.rollviewpager.RollPagerView>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="page 1"
-        android:onClick="indexPageOneListClick"/>
+        android:onClick="indexPageOneListClick"
+        android:text="page 1" />
+
     <ListView
+        android:id="@+id/index_page1_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/index_page1_listview">
+        android:layout_height="wrap_content">
 
     </ListView>
 

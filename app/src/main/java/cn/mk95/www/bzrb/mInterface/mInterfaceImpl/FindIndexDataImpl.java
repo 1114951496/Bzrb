@@ -16,12 +16,12 @@ import okhttp3.Response;
  */
 
 public class FindIndexDataImpl implements FindIndexData {
+
     @Override
     public void findIndexPageOndeData() {
-
+        IndexPageOneDataEntity indexPageOneDataEntity = null;
         OkHttpClient client = new OkHttpClient();
         Gson gson = new Gson();
-        IndexPageOneDataEntity indexPageOneDataEntity = null;
         Request request = new Request.Builder()
                 .url(MyUrl.INDEX_URL)
                 .build();
@@ -32,16 +32,25 @@ public class FindIndexDataImpl implements FindIndexData {
 
         } finally {
             if (indexPageOneDataEntity == null) {
-                System.out.println("失败");
+                System.out.println("==========失败========");
             } else {
+                System.out.println("===========成功=========");
                 System.out.println(indexPageOneDataEntity.getData().toString()
                         + "\n" + indexPageOneDataEntity.getTop_stories().toString()
                         + "\n" + indexPageOneDataEntity.getTimestamp());
             }
+            indexDataCallBack.indexPageOneData(indexPageOneDataEntity);
         }
     }
 
+    IndexDataCallBack indexDataCallBack=null;
+
     public interface IndexDataCallBack{
-        public void indexPageOneData();
+        public void indexPageOneData(IndexPageOneDataEntity indexPageOneDataEntity);
+    }
+
+    public void setFindIndexPageOneListener(IndexDataCallBack indexDataCallBack){
+        this.indexDataCallBack=indexDataCallBack;
+        findIndexPageOndeData();
     }
 }

@@ -7,6 +7,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import cn.mk95.www.bzrb.R;
+import cn.mk95.www.bzrb.presenter.IndexDataManager;
 
 public class WelcomeActivity extends Activity {
 
@@ -15,6 +16,8 @@ public class WelcomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        IndexDataManager indexDataManager=new IndexDataManager();
+        indexDataManager.LoadData();
         init();
     }
 
