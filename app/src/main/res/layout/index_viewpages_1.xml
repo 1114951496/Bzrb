@@ -11,11 +11,11 @@
         android:layout_height="200dp">
     </com.jude.rollviewpager.RollPagerView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="indexPageOneListClick"
-        android:text="page 1" />
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:onClick="indexPageOneListClick"-->
+        <!--android:text="page 1" />-->
 
     <cn.mk95.www.bzrb.ui.DropDownListView
         android:id="@+id/index_page1_listview"

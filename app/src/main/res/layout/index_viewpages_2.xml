@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="page 2"
-        android:onClick="indexPageTwoListClick"/>
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="page 2"-->
+        <!--android:onClick="indexPageTwoListClick"/>-->
     <cn.mk95.www.bzrb.ui.DropDownListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

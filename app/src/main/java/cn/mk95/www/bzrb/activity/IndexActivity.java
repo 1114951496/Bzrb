@@ -1,8 +1,10 @@
 package cn.mk95.www.bzrb.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,8 +21,8 @@ import android.widget.TextView;
 import com.jude.rollviewpager.RollPagerView;
 
 import java.util.ArrayList;
-
 import cn.mk95.www.bzrb.R;
+import cn.mk95.www.bzrb.mInterface.mInterfaceImpl.IntoNewsPageImpl;
 import cn.mk95.www.bzrb.presenter.IndexDataManager;
 import cn.mk95.www.bzrb.ui.DropDownListView;
 
@@ -48,6 +51,7 @@ public class IndexActivity extends Activity implements View.OnClickListener {
     //用户投稿listview
     private DropDownListView page_two_list;
 
+    private IntoNewsPageImpl intoNewsPage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +76,6 @@ public class IndexActivity extends Activity implements View.OnClickListener {
         pageView.add(view2);
 
         PagerAdapter pagerAdapter = new PagerAdapter(){
-
             int flag=0;
             @Override
             //获取当前窗体界面数
@@ -140,6 +143,30 @@ public class IndexActivity extends Activity implements View.OnClickListener {
         rollPagerView=(RollPagerView)view1.findViewById(R.id.rollViewpager);
         IndexDataManager indexDataManager=new IndexDataManager(viewPager,rollPagerView,page_one_list,page_two_list);
         //indexDataManager.init();
+
+        page_one_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                page_one_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent intent=new Intent();
+                        intent.putExtra("comment_id",IndexDataManager.indexPageOneData.getData().get(i-1).getDocument_id());
+                        intent.setClass(IndexActivity.this,NewsActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+        });
+        page_two_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent=new Intent();
+                intent.putExtra("comment_id",IndexDataManager.indexPageTwoData.getData().get(i-1).getDocument_id());
+                intent.setClass(IndexActivity.this,NewsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
@@ -199,8 +226,13 @@ public class IndexActivity extends Activity implements View.OnClickListener {
     }
 
     //该方法用于测试pageview的第一页（首页）
-    public void indexPageOneListClick(){
+    public void indexPageOneListClick(View v){
+        String comment_id="46741";
 
+        Intent intent=new Intent();
+        intent.putExtra("comment_id",comment_id);
+        intent.setClass(IndexActivity.this,NewsActivity.class);
+        startActivity(intent);
     }
 
     //该方法用于测试pageview的第二页（用户投稿）
