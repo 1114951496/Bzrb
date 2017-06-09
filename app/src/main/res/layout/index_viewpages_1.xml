@@ -2,24 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    xmlns:listViewAttr="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
     <!--轮播图-->
     <com.jude.rollviewpager.RollPagerView
+        android:id="@+id/rollViewpager"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:id="@+id/rollViewpager"/>
+        android:layout_height="200dp">
+    </com.jude.rollviewpager.RollPagerView>
 
-    <TextView
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:onClick="indexPageOneListClick"-->
+        <!--android:text="page 1" />-->
+
+    <cn.mk95.www.bzrb.ui.DropDownListView
+        android:id="@+id/index_page1_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="page 1"
-        android:onClick="indexPageOneListClick"/>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/index_page1_listview">
+        android:drawSelectorOnTop="false"
+        listViewAttr:isAutoLoadOnBottom="true"
+        listViewAttr:isDropDownStyle="true"
+        listViewAttr:isOnBottomStyle="true">
 
-    </ListView>
+    </cn.mk95.www.bzrb.ui.DropDownListView>
 
 </LinearLayout>

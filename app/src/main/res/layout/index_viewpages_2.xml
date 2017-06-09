@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:listViewAttr="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="page 2"-->
+        <!--android:onClick="indexPageTwoListClick"/>-->
+    <cn.mk95.www.bzrb.ui.DropDownListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="page 2"
-        android:onClick="indexPageTwoListClick"/>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/index_page2_listview">
+        android:id="@+id/index_page2_listview"
+        android:drawSelectorOnTop="false"
+        listViewAttr:isAutoLoadOnBottom="true"
+        listViewAttr:isDropDownStyle="true"
+        listViewAttr:isOnBottomStyle="true">
 
-    </ListView>
+    </cn.mk95.www.bzrb.ui.DropDownListView>
 </LinearLayout>
