@@ -31,4 +31,5 @@ dependencies {
     compile 'com.jude:rollviewpager:1.2.9'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.squareup.okio:okio:1.13.0'
+
 }

@@ -5,5 +5,7 @@ package cn.mk95.www.bzrb.mInterface;
  */
 
 public interface FindIndexData {
-    public void findIndexPageOndeData();
+    public void findIndexPageOndeData(String timestamp);
+
+    public void findIndexPageTwoData(String timestamp);
 }

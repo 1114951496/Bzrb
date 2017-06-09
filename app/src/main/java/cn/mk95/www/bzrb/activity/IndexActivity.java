@@ -9,18 +9,19 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jude.rollviewpager.RollPagerView;
-import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 
 import java.util.ArrayList;
 
 import cn.mk95.www.bzrb.R;
+import cn.mk95.www.bzrb.presenter.IndexDataManager;
+import cn.mk95.www.bzrb.ui.DropDownListView;
 
 public class IndexActivity extends Activity implements View.OnClickListener {
 
@@ -42,6 +43,10 @@ public class IndexActivity extends Activity implements View.OnClickListener {
     private int one;
     //轮播图
     private RollPagerView rollPagerView;
+    //首页listview
+    private DropDownListView page_one_list;
+    //用户投稿listview
+    private DropDownListView page_two_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +73,7 @@ public class IndexActivity extends Activity implements View.OnClickListener {
 
         PagerAdapter pagerAdapter = new PagerAdapter(){
 
+            int flag=0;
             @Override
             //获取当前窗体界面数
             public int getCount() {
@@ -88,6 +94,22 @@ public class IndexActivity extends Activity implements View.OnClickListener {
             public Object instantiateItem(View arg0, int arg1){
                 ((ViewPager)arg0).addView(pageView.get(arg1));
                 return pageView.get(arg1);
+            }
+            @Override
+            public void notifyDataSetChanged() {
+                System.out.println("===========notifyDataSetChanged");
+                flag=getCount()+1;
+                super.notifyDataSetChanged();
+            }
+
+            @Override
+            public int getItemPosition(Object object) {
+                System.out.println("===========getItemPosition");
+                if(flag>0){
+                    flag=0;
+                    return POSITION_NONE;
+                }
+                return super.getItemPosition(object);
             }
         };
 
@@ -112,11 +134,12 @@ public class IndexActivity extends Activity implements View.OnClickListener {
         //将滚动条的初始位置设置成与左边界间隔一个offset
         scrollbar.setImageMatrix(matrix);
 
+        page_one_list=(DropDownListView)view1.findViewById(R.id.index_page1_listview);
+        page_two_list=(DropDownListView)view2.findViewById(R.id.index_page2_listview);
         //首页轮播图
         rollPagerView=(RollPagerView)view1.findViewById(R.id.rollViewpager);
-        rollPagerView.setPlayDelay(3000);//*播放间隔
-        rollPagerView.setAnimationDurtion(500);//透明度
-        rollPagerView.setAdapter(new rollViewpagerAdapter());//配置适配器
+        IndexDataManager indexDataManager=new IndexDataManager(viewPager,rollPagerView,page_one_list,page_two_list);
+        //indexDataManager.init();
     }
 
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
@@ -158,25 +181,7 @@ public class IndexActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    private class rollViewpagerAdapter extends StaticPagerAdapter {
 
-        private int[] res={R.drawable.splash,R.drawable.scrollbar};
-
-        @Override
-        public View getView(ViewGroup container, int position) {
-            ImageView imageView=new ImageView(container.getContext());
-            imageView.setImageResource(res[position]);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
-            return imageView;
-        }
-
-        @Override
-        public int getCount() {
-            return res.length;
-        }
-    }
 
 
     @Override
