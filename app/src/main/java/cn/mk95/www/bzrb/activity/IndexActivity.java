@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import cn.mk95.www.bzrb.R;
 import cn.mk95.www.bzrb.presenter.IndexDataManager;
+import cn.mk95.www.bzrb.ui.DropDownListView;
 
 public class IndexActivity extends Activity implements View.OnClickListener {
 
@@ -43,9 +44,9 @@ public class IndexActivity extends Activity implements View.OnClickListener {
     //轮播图
     private RollPagerView rollPagerView;
     //首页listview
-    private ListView page_one_list;
+    private DropDownListView page_one_list;
     //用户投稿listview
-    private ListView page_two_list;
+    private DropDownListView page_two_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,8 +134,8 @@ public class IndexActivity extends Activity implements View.OnClickListener {
         //将滚动条的初始位置设置成与左边界间隔一个offset
         scrollbar.setImageMatrix(matrix);
 
-        page_one_list=(ListView)view1.findViewById(R.id.index_page1_listview);
-        page_two_list=(ListView)view2.findViewById(R.id.index_page2_listview);
+        page_one_list=(DropDownListView)view1.findViewById(R.id.index_page1_listview);
+        page_two_list=(DropDownListView)view2.findViewById(R.id.index_page2_listview);
         //首页轮播图
         rollPagerView=(RollPagerView)view1.findViewById(R.id.rollViewpager);
         IndexDataManager indexDataManager=new IndexDataManager(viewPager,rollPagerView,page_one_list,page_two_list);

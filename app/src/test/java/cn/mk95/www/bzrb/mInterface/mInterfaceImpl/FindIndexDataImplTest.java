@@ -3,6 +3,7 @@ package cn.mk95.www.bzrb.mInterface.mInterfaceImpl;
 import org.junit.Test;
 
 import cn.mk95.www.bzrb.model.IndexPageOneDataEntity;
+import cn.mk95.www.bzrb.model.IndexPageTwoDataEntity;
 
 
 /**
@@ -15,6 +16,16 @@ public class FindIndexDataImplTest {
         findIndexData.setFindIndexPageOneListener(new FindIndexDataImpl.IndexDataCallBack() {
             @Override
             public void indexPageOneData(IndexPageOneDataEntity indexPageOneDataEntity) {
+
+            }
+        });
+    }
+    @Test
+    public void findIndexPageTwoData() {
+        FindIndexDataImpl findIndexData=new FindIndexDataImpl();
+        findIndexData.setFindIndexPageTwoListener(new FindIndexDataImpl.IndexPageTwoDataCallBack() {
+            @Override
+            public void indexPageTwoData(IndexPageTwoDataEntity indexPageTwoDataEntity) {
 
             }
         });
