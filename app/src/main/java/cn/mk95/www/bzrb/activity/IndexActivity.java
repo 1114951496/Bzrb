@@ -1,8 +1,10 @@
 package cn.mk95.www.bzrb.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -19,8 +21,8 @@ import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 
 import java.util.ArrayList;
-
 import cn.mk95.www.bzrb.R;
+import cn.mk95.www.bzrb.mInterface.mInterfaceImpl.IntoNewsPageImpl;
 
 public class IndexActivity extends Activity implements View.OnClickListener {
 
@@ -43,6 +45,7 @@ public class IndexActivity extends Activity implements View.OnClickListener {
     //轮播图
     private RollPagerView rollPagerView;
 
+    private IntoNewsPageImpl intoNewsPage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -194,8 +197,13 @@ public class IndexActivity extends Activity implements View.OnClickListener {
     }
 
     //该方法用于测试pageview的第一页（首页）
-    public void indexPageOneListClick(){
+    public void indexPageOneListClick(View v){
+        String comment_id="46741";
 
+        Intent intent=new Intent();
+        intent.putExtra("comment_id",comment_id);
+        intent.setClass(IndexActivity.this,NewsActivity.class);
+        startActivity(intent);
     }
 
     //该方法用于测试pageview的第二页（用户投稿）

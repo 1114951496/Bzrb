@@ -6,4 +6,5 @@ package cn.mk95.www.bzrb.utils;
 
 public class MyUrl {
     public static String INDEX_URL="http://dailyapi.ibaozou.com/api/v31/documents/latest";
+    public static String IT_url="http://dailyapi.ibaozou.com/api/v31/documents/";
 }
